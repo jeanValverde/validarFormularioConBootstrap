@@ -7,8 +7,8 @@
  * Nota: el validar contraseña debe estar un input abajo de otro 
  */
 (function () {
-    //Obtener el primer formulario cuyo name es form 
-    var formulario = document.getElementsByName("form")[0];
+    //obtengo todos los formularios 
+    var formulariosAll = document.forms;
     /**
      * 
      * @param {Elements} rut
@@ -148,7 +148,7 @@
      * @param {type} 
      * @returns {Valida todos los radio de un grupo}
      */
-    function validarRadio() {
+    function validarRadio(formulario) {
         var radios = new Array();
         for (var i = 0, max = formulario.elements.length; i < max; i++) {
             if (formulario.elements[i].type == "radio") {
@@ -185,13 +185,13 @@
      * @param {elementos} e , e2
      * @returns {Boolean} TRUE (iguales) / FALSE (Diferentes invalido)
      */
-    function validar_igual_password(e) {
-        var elemento = formulario.elements[objeterIndexPasswordValidar()];
-        var elementoPass = formulario.elements[objeterIndexPasswordValidar() - 1];
+    function validar_igual_password(e, formulario) {
+        var elemento = formulario.elements[objeterIndexPasswordValidar(formulario)];
+        var elementoPass = formulario.elements[objeterIndexPasswordValidar(formulario) - 1];
         if (elemento.value == elementoPass.value) {
-            formulario.elements[objeterIndexPasswordValidar()].setAttribute("class", "form-control is-valid");
+            formulario.elements[objeterIndexPasswordValidar(formulario)].setAttribute("class", "form-control is-valid");
         } else {
-            formulario.elements[objeterIndexPasswordValidar()].setAttribute("class", "form-control is-invalid");
+            formulario.elements[objeterIndexPasswordValidar(formulario)].setAttribute("class", "form-control is-invalid");
             e.preventDefault(e);
         }
     }
@@ -200,7 +200,7 @@
      * @param  
      * @returns {El index del segundo input password}
      */
-    function objeterIndexPasswordValidar() {
+    function objeterIndexPasswordValidar(formulario) {
         var indexs = new Array();
         for (var i = 0, max = formulario.elements.length; i < max; i++) {
             if (formulario.elements[i].type == "password") {
@@ -222,7 +222,7 @@
      * @param {type} 
      * @returns {Void} cambia la clase de los input tipo radio 
      */
-    function quitarFormatoInvalid() {
+    function quitarFormatoInvalid(formulario) {
         for (var i = 0, max = formulario.elements.length; i < max; i++) {
             if (formulario.elements[i].type == "radio") {
                 //el siguiente es el que necesitamos 
@@ -236,8 +236,8 @@
      * @returns {Boolean} 
      * TRUE (Si el selecciono una opción / FALSE (No se selecciono ninguna opción valida)
      */
-    function validarSelectOne(e) {
-        var elemento = formulario.elements[e];
+    function validarSelectOne(elemento) {
+        
         if (elemento.value == "select") {
             return false;
         } else {
@@ -269,12 +269,14 @@
         }
     }
 
+
+
     /*
      * 
-     * @param {type} e
+     * @param {type} e , formNumber = indice de el formulario en el documento a validar 
      * @returns  void / Validar y recorrer input pot input y validarlos 
      */
-    var validar = function (e) {
+    function validarForm(e, formNumber, formulario) {
         for (var i = 0, max = formulario.elements.length; i < max; i++) {
             //tipo email validador 
             if (formulario.elements[i].type == "email") {
@@ -312,7 +314,7 @@
                 //validar si cumple con una contraseña segura 
                 if (validarPassword(formulario.elements[i])) {
                     formulario.elements[i].setAttribute("class", "form-control is-valid");
-                    validar_igual_password(e);
+                    validar_igual_password(e, formulario);
                 } else {
                     formulario.elements[i].setAttribute("class", "form-control is-invalid");
                     e.preventDefault(e);
@@ -321,7 +323,7 @@
             //validar radios
             if (formulario.elements[i].type == "radio") {
                 //validar los radio button 
-                if (validarRadio()) {
+                if (validarRadio(formulario)) {
                     formulario.elements[i].setAttribute("class", "custom-control-input is-valid");
                 } else {
                     formulario.elements[i].setAttribute("class", "custom-control-input is-invalid");
@@ -339,7 +341,7 @@
             }
             //validar select-one
             if (formulario.elements[i].type == "select-one") {
-                if (validarSelectOne(i)) {
+                if (validarSelectOne(formulario.elements[i])) {
                     formulario.elements[i].setAttribute("class", "custom-select is-valid");
                 } else {
                     formulario.elements[i].setAttribute("class", "custom-select is-invalid");
@@ -377,10 +379,22 @@
                 }
             }
         }
+    }
+    ;
+
+    var validarTodosForm = function (e) {
+        for (var i = 0, max = formulariosAll.length; i < max; i++) {
+            validarForm(e, i, formulariosAll[i]);
+        }
     };
-    //cada vez que cambia algún input
-    formulario.addEventListener("change", validar);
-    //Evento de envio de formulario
-    formulario.addEventListener("submit", validar);
+
+
+    for (var i = 0, max = formulariosAll.length; i < max; i++) {
+        //cada vez que cambia algún input
+        formulariosAll[i].addEventListener("change", validarTodosForm);
+        //Evento de envio de formulario
+        formulariosAll[i].addEventListener("submit", validarTodosForm);
+    }
+
 }());
 
