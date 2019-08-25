@@ -6,6 +6,6 @@
     "contributors": [],
     "dependencies": {},
     "scripts": {
-       "build": "next build"
+       "build": ""
     }
 }
