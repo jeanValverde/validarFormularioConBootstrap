@@ -8,7 +8,6 @@
  */
 function validatorForms(formulario) {
 
-   console.log(formulario);
     /**
      *
      * @param {Elements} rut
