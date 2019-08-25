@@ -41,10 +41,10 @@ Mira **Deployment** para conocer como desplegar el proyecto.
 _Para iniciar en producción usamos Zeit como una "CDN"_
 
 ```
-<script src="https://validarformularioconbootstrap.jeagonzalezv.now.sh/public_html/js/formularios.js"></script> 
+<script src="https://validarformularioconbootstrap.jeanvalverde.now.sh/public_html/js/formularios.js"></script> 
 ```
 ```
-https://validarformularioconbootstrap.jeagonzalezv.now.sh/public_html/js/formularios.js
+https://validarformularioconbootstrap.jeanvalverde.now.sh/public_html/js/formularios.js
 ```
 
 
