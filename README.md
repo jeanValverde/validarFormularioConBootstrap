@@ -16,6 +16,15 @@ _Este proyecto WEB contiene._
 
 _Cada ID de los "< input id="idUnico />" deben ser únicos_
 
+* Text
+* Rut (Identificador chileno)
+* Number
+* Password (Solo registrar)
+* Correo 
+* File img 
+* Radio
+* Checkbox
+* Text Area 
 ```
 <script src="path/formularios.js"></script>
 ```
@@ -30,6 +39,16 @@ _Cada ID de los "< input id="idUnico />" deben ser únicos_
        validatorForms(otherForm);
        
 </script>
+```
+
+```
+<input type="type" id="idUnico" class="form-control">
+<div class="valid-feedback">
+     Mensaje correcto 
+</div>
+<div class="invalid-feedback">
+     Escribe el mensaje incorrecto.
+</div>
 ```
 
 
