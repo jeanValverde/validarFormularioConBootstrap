@@ -1,18 +1,18 @@
-/* 
- * Este codigo valida cualquier formulario con Bootstrap 
- * Para usar esto debes cambiar en la linea 8 el name por el name de tu formulario 
- * Las visualización de las validaciones se realizan con bootstrap, con clases como is-valid o is-invalid 
- * Para realizar correctamente la validación del rut debes cambiar el id de la linea 296 por el id del input RUT que tu prefieras 
- * Para realizar correctamente la validación del file y visualizar su preview debes asignar al img un id llamado imagePreview o cambiarlo en la linea 264 por el que prefieras 
- * Nota: el validar contraseña debe estar un input abajo de otro 
+/*
+ * Este codigo valida cualquier formulario con Bootstrap
+ * Para usar esto debes cambiar en la linea 8 el name por el name de tu formulario
+ * Las visualización de las validaciones se realizan con bootstrap, con clases como is-valid o is-invalid
+ * Para realizar correctamente la validación del rut debes cambiar el id de la linea 296 por el id del input RUT que tu prefieras
+ * Para realizar correctamente la validación del file y visualizar su preview debes asignar al img un id llamado imagePreview o cambiarlo en la linea 264 por el que prefieras
+ * Nota: el validar contraseña debe estar un input abajo de otro
  */
-(function () {
-    //obtengo todos los formularios 
-    var formulariosAll = document.forms;
+function validatorForms(formulario) {
+
+   console.log(formulario);
     /**
-     * 
+     *
      * @param {Elements} rut
-     * @returns Void - Cambia el valor del input del RUT por formato xx.xxx.xxx-x 
+     * @returns Void - Cambia el valor del input del RUT por formato xx.xxx.xxx-x
      */
     function formato_rut(rut)
     {
@@ -20,7 +20,7 @@
                 .replace(/^(\d{1,2})(\d{3})(\d{3})(\w{1})$/, '$1.$2.$3-$4')
     }
     /*
-     * 
+     *
      * @param {Elemnts} RUT
      * @returns TRUE (El rut ingresado es valido) / FALSE (El  rut es invalido)
      */
@@ -86,7 +86,7 @@
         }
     }
     /*
-     * 
+     *
      * @param Elements elemento
      * @returns TRUE (correo valido) / FALSE (Correo invalido)
      */
@@ -94,15 +94,15 @@
         var texto = document.getElementById(elemento.id).value;
         var regex = /^[-\w.%+]{1,64}@(?:[A-Z0-9-]{1,63}\.){1,125}[A-Z]{2,63}$/i;
         if (!regex.test(texto)) {
-            //correo invalido 
+            //correo invalido
             return false;
         } else {
-            //correo valido 
+            //correo valido
             return true;
         }
     }
     /*
-     * 
+     *
      * @param Elements elemento
      * @returns TRUE (Campo VALIDO) / FALSE (campo vacio INVALIDO)
      */
@@ -110,15 +110,15 @@
         var texto = document.getElementById(elemento.id).value;
         texto = texto.trim();
         if (texto.length == 0 || texto == "") {
-            //campo invalido 
+            //campo invalido
             return false;
         } else {
-            //campo valido 
+            //campo valido
             return true;
         }
     }
     /*
-     * 
+     *
      * @param {Elements} elemento
      * @returns TRUE (Esta selecconado) / FALSE (Es invalido, no seleccionado)
      */
@@ -131,7 +131,7 @@
         }
     }
     /*
-     * 
+     *
      * @param {String} e
      * @returns {Boolean} TRUE (Si es numero) / FALSE (Si no es numero)
      */
@@ -144,11 +144,11 @@
         }
     }
     /*
-     * 
-     * @param {type} 
+     *
+     * @param {type}
      * @returns {Valida todos los radio de un grupo}
      */
-    function validarRadio(formulario) {
+    function validarRadio() {
         var radios = new Array();
         for (var i = 0, max = formulario.elements.length; i < max; i++) {
             if (formulario.elements[i].type == "radio") {
@@ -167,10 +167,10 @@
             return false;
         }
     }
-    /* 
+    /*
      * @param {Elemento} e
      * @returns {Boolean} TRUE (Si la contraseña es valida) / FALSE (Sino es validas)
-     * La contraseña debe tener mínimo 6 caracteres, al menos una mayúscula, al menos una minúscula, al menos un número.  
+     * La contraseña debe tener mínimo 6 caracteres, al menos una mayúscula, al menos una minúscula, al menos un número.
      */
     function validarPassword(elemento) {
         var password = document.getElementById(elemento.id).value;
@@ -181,30 +181,30 @@
         }
     }
     /*
-     * 
+     *
      * @param {elementos} e , e2
      * @returns {Boolean} TRUE (iguales) / FALSE (Diferentes invalido)
      */
-    function validar_igual_password(e, formulario) {
-        var elemento = formulario.elements[objeterIndexPasswordValidar(formulario)];
-        var elementoPass = formulario.elements[objeterIndexPasswordValidar(formulario) - 1];
+    function validar_igual_password(e) {
+        var elemento = formulario.elements[objeterIndexPasswordValidar()];
+        var elementoPass = formulario.elements[objeterIndexPasswordValidar() - 1];
         if (elemento.value == elementoPass.value) {
-            formulario.elements[objeterIndexPasswordValidar(formulario)].setAttribute("class", "form-control is-valid");
+            formulario.elements[objeterIndexPasswordValidar()].setAttribute("class", "form-control is-valid");
         } else {
-            formulario.elements[objeterIndexPasswordValidar(formulario)].setAttribute("class", "form-control is-invalid");
+            formulario.elements[objeterIndexPasswordValidar()].setAttribute("class", "form-control is-invalid");
             e.preventDefault(e);
         }
     }
     /*
-     * 
-     * @param  
+     *
+     * @param
      * @returns {El index del segundo input password}
      */
-    function objeterIndexPasswordValidar(formulario) {
+    function objeterIndexPasswordValidar() {
         var indexs = new Array();
         for (var i = 0, max = formulario.elements.length; i < max; i++) {
             if (formulario.elements[i].type == "password") {
-                //el siguiente es el que necesitamos 
+                //el siguiente es el que necesitamos
                 indexs.push(i);
             }
         }
@@ -218,26 +218,26 @@
         return numMax;
     }
     /*
-     * 
-     * @param {type} 
-     * @returns {Void} cambia la clase de los input tipo radio 
+     *
+     * @param {type}
+     * @returns {Void} cambia la clase de los input tipo radio
      */
-    function quitarFormatoInvalid(formulario) {
+    function quitarFormatoInvalid() {
         for (var i = 0, max = formulario.elements.length; i < max; i++) {
             if (formulario.elements[i].type == "radio") {
-                //el siguiente es el que necesitamos 
+                //el siguiente es el que necesitamos
                 formulario.elements[i].setAttribute("class", "custom-control-input");
             }
         }
     }
     /*
-     * 
+     *
      * @param {Elemento} e
-     * @returns {Boolean} 
+     * @returns {Boolean}
      * TRUE (Si el selecciono una opción / FALSE (No se selecciono ninguna opción valida)
      */
-    function validarSelectOne(elemento) {
-        
+    function validarSelectOne(e) {
+        var elemento = formulario.elements[e];
         if (elemento.value == "select") {
             return false;
         } else {
@@ -245,7 +245,7 @@
         }
     }
     /*
-     * 
+     *
      * @param {elemento} e
      * @returns {Boolean}
      * Archivo valido que tenga las extensiones .jpeg / .jpg / .png / .gif solamente.
@@ -269,18 +269,16 @@
         }
     }
 
-
-
     /*
-     * 
-     * @param {type} e , formNumber = indice de el formulario en el documento a validar 
-     * @returns  void / Validar y recorrer input pot input y validarlos 
+     *
+     * @param {type} e
+     * @returns  void / Validar y recorrer input pot input y validarlos
      */
-    function validarForm(e, formNumber, formulario) {
+    var validar = function (e) {
         for (var i = 0, max = formulario.elements.length; i < max; i++) {
-            //tipo email validador 
+            //tipo email validador
             if (formulario.elements[i].type == "email") {
-                //validar 
+                //validar
                 if (validarEmail(formulario.elements[i])) {
                     formulario.elements[i].setAttribute("class", "form-control is-valid");
                 } else {
@@ -288,12 +286,12 @@
                     e.preventDefault(e);
                 }
             }
-            //validar Rut 
+            //validar Rut
             if (formulario.elements[i].type == "text") {
-                //validar vacios 
+                //validar vacios
                 if (validarVacio(formulario.elements[i])) {
                     formulario.elements[i].setAttribute("class", "form-control is-valid");
-                    //validar rut 
+                    //validar rut
                     //Solo cambiar el id por el id del rut de tu formulario
                     if (formulario.elements[i].id == "rut") {
                         if (valida_Rut(formulario.elements[i])) {
@@ -311,10 +309,10 @@
             }
             //validar password
             if (formulario.elements[i].type == "password") {
-                //validar si cumple con una contraseña segura 
+                //validar si cumple con una contraseña segura
                 if (validarPassword(formulario.elements[i])) {
                     formulario.elements[i].setAttribute("class", "form-control is-valid");
-                    validar_igual_password(e, formulario);
+                    validar_igual_password(e);
                 } else {
                     formulario.elements[i].setAttribute("class", "form-control is-invalid");
                     e.preventDefault(e);
@@ -322,8 +320,8 @@
             }
             //validar radios
             if (formulario.elements[i].type == "radio") {
-                //validar los radio button 
-                if (validarRadio(formulario)) {
+                //validar los radio button
+                if (validarRadio()) {
                     formulario.elements[i].setAttribute("class", "custom-control-input is-valid");
                 } else {
                     formulario.elements[i].setAttribute("class", "custom-control-input is-invalid");
@@ -341,7 +339,7 @@
             }
             //validar select-one
             if (formulario.elements[i].type == "select-one") {
-                if (validarSelectOne(formulario.elements[i])) {
+                if (validarSelectOne(i)) {
                     formulario.elements[i].setAttribute("class", "custom-select is-valid");
                 } else {
                     formulario.elements[i].setAttribute("class", "custom-select is-invalid");
@@ -350,7 +348,7 @@
             }
             //validar textarea
             if (formulario.elements[i].type == "textarea") {
-                //validar vacios 
+                //validar vacios
                 if (validarVacio(formulario.elements[i])) {
                     formulario.elements[i].setAttribute("class", "form-control is-valid");
                 } else {
@@ -360,7 +358,7 @@
             }
             //validar number
             if (formulario.elements[i].type == "number") {
-                //validar datos numeros 
+                //validar datos numeros
                 if (validarSiNumero(formulario.elements[i])) {
                     formulario.elements[i].setAttribute("class", "form-control is-valid");
                 } else {
@@ -370,7 +368,7 @@
             }
             //validar file
             if (formulario.elements[i].type == "file") {
-                //validar ruta absoluta 
+                //validar ruta absoluta
                 if (validarInputFile(formulario.elements[i])) {
                     formulario.elements[i].setAttribute("class", "custom-file-input is-valid");
                 } else {
@@ -379,22 +377,9 @@
                 }
             }
         }
-    }
-    ;
-
-    var validarTodosForm = function (e) {
-        for (var i = 0, max = formulariosAll.length; i < max; i++) {
-            validarForm(e, i, formulariosAll[i]);
-        }
     };
-
-
-    for (var i = 0, max = formulariosAll.length; i < max; i++) {
-        //cada vez que cambia algún input
-        formulariosAll[i].addEventListener("change", validarTodosForm);
-        //Evento de envio de formulario
-        formulariosAll[i].addEventListener("submit", validarTodosForm);
-    }
-
-}());
-
+    //cada vez que cambia algún input
+    formulario.addEventListener("change", validar);
+    //Evento de envio de formulario
+    formulario.addEventListener("submit", validar);
+};
