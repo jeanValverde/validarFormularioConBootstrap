@@ -4,5 +4,8 @@
     "keywords": ["util", "functional", "server", "client", "browser"],
     "author": "jean",
     "contributors": [],
-    "dependencies": {}
+    "dependencies": {},
+    "scripts": {
+       "build": "next build"
+    }
 }
