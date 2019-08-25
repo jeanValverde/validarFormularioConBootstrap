@@ -49,7 +49,7 @@ https://validarformularioconbootstrap.jeanvalverde.now.sh/public_html/js/formula
 
 
 * [Zeit](https://www.zeit.co/)
-* [CDN](https://validarformularioconbootstrap.jeagonzalezv.now.sh/public_html/js/formularios.js)
+* [CDN](https://validarformularioconbootstrap.jeanvalverde.now.sh/public_html/js/formularios.js)
 
 ## Versionado 📌
 
