@@ -25,6 +25,8 @@ _Cada ID de los "< input id="idUnico />" deben ser únicos_
 * Radio
 * Checkbox
 * Text Area 
+* [Documentación completa y ejemplo](https://validarformularioconbootstrap.jeanvalverde.now.sh/public_html/formularios.html)
+
 ```
 <script src="path/formularios.js"></script>
 ```
