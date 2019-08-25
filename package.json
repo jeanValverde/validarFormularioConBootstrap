@@ -4,8 +4,5 @@
     "keywords": ["util", "functional", "server", "client", "browser"],
     "author": "jean",
     "contributors": [],
-    "dependencies": {},
-    "scripts": {
-        "build": "/public_html/formularios.html"
-    }
+    "dependencies": {}
 }
