@@ -6,5 +6,6 @@
     "contributors": [],
     "dependencies": {},
     "scripts": {
+        "build": " public_html/formularios.html"
     }
 }
